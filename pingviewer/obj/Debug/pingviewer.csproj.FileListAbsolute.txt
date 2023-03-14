@@ -1,8 +1,0 @@
-C:\Users\User\source\repos\pingviewer\pingviewer\bin\Debug\pingviewer.exe.config
-C:\Users\User\source\repos\pingviewer\pingviewer\bin\Debug\pingviewer.exe
-C:\Users\User\source\repos\pingviewer\pingviewer\bin\Debug\pingviewer.pdb
-C:\Users\User\source\repos\pingviewer\pingviewer\obj\Debug\pingviewer.csproj.AssemblyReference.cache
-C:\Users\User\source\repos\pingviewer\pingviewer\obj\Debug\pingviewer.csproj.SuggestedBindingRedirects.cache
-C:\Users\User\source\repos\pingviewer\pingviewer\obj\Debug\pingviewer.csproj.CoreCompileInputs.cache
-C:\Users\User\source\repos\pingviewer\pingviewer\obj\Debug\pingviewer.exe
-C:\Users\User\source\repos\pingviewer\pingviewer\obj\Debug\pingviewer.pdb
