@@ -19,14 +19,17 @@ namespace pingviewer
                 if(reply.Status == IPStatus.Success)
                 {
                     var sb = new StringBuilder();
+                    sb.Append("#");
                     for (int j = 0; j < reply.RoundtripTime; j += 2)
                     {
                         sb.Append("#");
                     }
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(sb.ToString());
                 }
                 else
-                {
+                {   
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("X");
                 }
                 System.Threading.Thread.Sleep(1000);
