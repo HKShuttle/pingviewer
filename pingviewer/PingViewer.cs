@@ -7,7 +7,7 @@ using System.Net.NetworkInformation;
 
 namespace pingviewer
 {
-    internal class main
+    internal class PingViewer
     {
         static void Main(string[] args)
         {
