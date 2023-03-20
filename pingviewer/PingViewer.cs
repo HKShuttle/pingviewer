@@ -9,31 +9,66 @@ namespace pingviewer
 {
     internal class PingViewer
     {
+        static int count = 0;
+        static int success = 0;
+        static int fail = 0;
+        static bool loop = true;
+
         static void Main(string[] args)
         {
+            // Establish an event handler to process key press events.
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(interruptHandler);
+
             Console.WriteLine("Ping to {0}, 1 block = 2ms", args[0]);
             Ping ping = new Ping();
-            for (int i = 0; i < 1000; i++)
+            while (count < 1000 && loop)
             {
                 PingReply reply = ping.Send(args[0]);
-                if(reply.Status == IPStatus.Success)
+                count++;
+                if (reply.Status == IPStatus.Success)
                 {
+                    success++;
                     var sb = new StringBuilder();
-                    sb.Append("#");
-                    for (int j = 0; j < reply.RoundtripTime; j += 2)
+                    for (int i = 0; i < reply.RoundtripTime && i <= 100; i += 2)
                     {
                         sb.Append("#");
+                    }
+                    if (reply.RoundtripTime == 0)
+                    {
+                        sb.Append("-");
+                    }
+                    if (reply.RoundtripTime > 100)
+                    {
+                        sb.Append("+");
                     }
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(sb.ToString());
                 }
                 else
-                {   
+                {
+                    fail++;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("X");
                 }
                 System.Threading.Thread.Sleep(1000);
             }
+            summary();
         }
+
+        protected static void interruptHandler(object sender, ConsoleCancelEventArgs e)
+        {
+            loop = false;
+            e.Cancel = true;
+        }
+
+        protected static void summary()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("----------");
+            Console.WriteLine("ICMP echo requests: {0}", count);
+            Console.WriteLine("Success replys: {0}", success);
+            Console.WriteLine("Fail replys: {0}", fail);
+        }
+
     }
 }
