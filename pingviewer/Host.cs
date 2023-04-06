@@ -16,6 +16,7 @@ namespace pingviewer
         private int count;
         private int success;
         private int fail;
+        private long lastRTT;
         private Ping ping;
 
         public int Count { get; private set; }
@@ -23,6 +24,7 @@ namespace pingviewer
         public int Fail { get; private set; }
         public string Hostname { get; private set; }
         public LongRingBuffer SuccessRTT { get; private set; }
+        public long LastRTT { get; private set; }
 
         public Host(string hostname)
         {
@@ -34,9 +36,24 @@ namespace pingviewer
             successRTT = new LongRingBuffer(1000);
         }
 
-        public PingReply SendPing()
+        public IPStatus CheckReachability()
         {
-            return ping.Send(hostname);
+            PingReply reply = ping.Send(hostname);
+            count++;
+
+            if (reply.Status == IPStatus.Success) 
+            {
+                success++;
+                lastRTT = reply.RoundtripTime;
+                successRTT.enqueue(lastRTT);
+                // MainメソッドからRTTの取得はLastRTTアクセサを通して行う
+            }
+            else
+            {
+                fail++;
+            }
+
+            return reply.Status;
         }
     }
 }
