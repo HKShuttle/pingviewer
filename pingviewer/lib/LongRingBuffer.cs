@@ -13,11 +13,6 @@ namespace pingviewer.lib
         private int count; // how many times enqueued
         private int ptr; // pointer of next enqueue position
 
-        public int Count { get; }
-        public long[] Buffer { get; }
-        public int Length { get; }
-        public int Ptr { get; }
-
         public LongRingBuffer(int length)
         {
             this.length = length;

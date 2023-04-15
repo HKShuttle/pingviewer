@@ -19,13 +19,6 @@ namespace pingviewer
         private long lastRTT;
         private Ping ping;
 
-        public int Count { get; private set; }
-        public int Success { get; private set; }
-        public int Fail { get; private set; }
-        public string Hostname { get; private set; }
-        public LongRingBuffer SuccessRTT { get; private set; }
-        public long LastRTT { get; private set; }
-
         public Host(string hostname)
         {
             this.hostname = hostname;
